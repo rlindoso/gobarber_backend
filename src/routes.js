@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import multer from 'multer';
 import multerConfig from './config/multer';
+import swagger from './config/swagger';
 
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
@@ -14,6 +15,8 @@ import NotificationController from './app/controllers/NotificationController';
 import authMiddlaware from './app/middlewares/auth';
 
 const routes = new Router();
+
+swagger.setRoutes(routes);
 
 const upload = multer(multerConfig);
 
