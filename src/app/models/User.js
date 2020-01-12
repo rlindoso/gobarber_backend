@@ -62,6 +62,36 @@ export default User;
  *           name: Rafael
  *           email: rafael@email.com
  *           password: passwd
+ *           provider: false
+ * 
+ *      UserUpdate:
+ *        type: object
+ *        properties:
+ *          name:
+ *            type: string
+ *          email:
+ *            type: string
+ *            format: email
+ *            description: Email for the user, needs to be unique.
+ *          oldPassword:
+ *            type: string
+ *            description: Only if change password
+ *          password:
+ *            type: string
+ *            description: Only if change password
+ *          confirmPassword:
+ *            type: string
+ *            description: Only if change password
+ *          provider:
+ *            type: boolean
+ *        example:
+ *           name: Rafael
+ *           email: rafael@email.com
+ *           oldPassword: passwd
+ *           password: newpasswd
+ *           confirmPassword: newpasswd
+ *           provider: false
+
  */
 
 /**
@@ -91,4 +121,28 @@ export default User;
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/User'
+ */
+
+ /**
+ * @swagger
+ * path:
+ *  /users:
+ *    put:
+ *      summary: Update a user
+ *      tags: [Users]
+ *      security:
+ *        - Bearer: []
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/UserUpdate'
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/UserUpdate'
  */
