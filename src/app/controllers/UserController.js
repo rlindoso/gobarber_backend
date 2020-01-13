@@ -75,3 +75,124 @@ class UserController {
 }
 
 export default new UserController();
+
+/**
+ * @swagger
+ *  components:
+ *    securitySchemes:
+ *      bearerAuth:            # arbitrary name for the security scheme
+ *        type: http
+ *        scheme: bearer
+ *        bearerFormat: JWT    # optional, arbitrary value for documentation purposes
+ *    schema:
+ *      User:
+ *        type: object
+ *        required:
+ *          - name
+ *          - email
+ *          - password
+ *        properties:
+ *          name:
+ *            type: string
+ *          email:
+ *            type: string
+ *            format: email
+ *            description: Email for the user, needs to be unique.
+ *          password:
+ *            type: string
+ *            description: Minimum 3 characters
+ *          provider:
+ *            type: boolean
+ *        example:
+ *           name: Rafael
+ *           email: rafael@email.com
+ *           password: passwd
+ *           provider: false
+ * 
+ *      UserUpdate:
+ *        type: object
+ *        properties:
+ *          name:
+ *            type: string
+ *          email:
+ *            type: string
+ *            format: email
+ *            description: Email for the user, needs to be unique.
+ *          oldPassword:
+ *            type: string
+ *            description: Only if change password
+ *          password:
+ *            type: string
+ *            description: Only if change password
+ *          confirmPassword:
+ *            type: string
+ *            description: Only if change password
+ *          provider:
+ *            type: boolean
+ *        example:
+ *           name: Rafael
+ *           email: rafael@email.com
+ *           oldPassword: passwd
+ *           password: newpasswd
+ *           confirmPassword: newpasswd
+ *           provider: false
+ */
+
+ /**
+ * @swagger
+ *  security:
+ *    - bearerAuth: []         # use the same name as above
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: User management
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /users:
+ *    post:
+ *      summary: Create a new user
+ *      tags: [Users]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schema/User'
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schema/User'
+ */
+
+ /**
+ * @swagger
+ * path:
+ *  /users:
+ *    put:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: Update a user
+ *      tags: [Users]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schema/UserUpdate'
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schema/UserUpdate'
+ */
