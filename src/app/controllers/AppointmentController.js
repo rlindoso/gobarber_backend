@@ -112,3 +112,67 @@ class AppointmentController {
 }
 
 export default new AppointmentController();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Appointment
+ *   description: Appointment
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /appointments:
+ *    get:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: List appointments
+ *      tags: [Appointment]
+ *      responses:
+ *        "200":
+ *          description: A appointment schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                noExemple: noExemple
+ */
+
+ /**
+ * @swagger
+ * path:
+ *  /appointments:
+ *    post:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: Create appointment
+ *      tags: [Appointment]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - provider_id
+ *                - date
+ *              properties:
+ *                provider_id:
+ *                  type: integer
+ *                  description: Id of a provider.
+ *                date:
+ *                  type: string
+ *                  format: date-time
+ *                  default: 2020-01-09T15:00:00-03:00
+ *                  description: Date of appointment
+ *              example:
+ *                provider_id: 1
+ *                date: 2020-01-09T15:00:00-03:00
+ *      responses:
+ *        "200":
+ *          description: A appointment schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                noExemple: noExemple
+ */
