@@ -33,3 +33,36 @@ class ScheduleController {
 }
 
 export default new ScheduleController();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Schedule
+ *   description: Schedule
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /schedule:
+ *    get:
+ *      security:
+ *        - bearerAuth: [] 
+ *      summary: List schedule
+ *      tags: [Schedule]
+ *      parameters:
+ *        - name: date
+ *          in: query
+ *          schema:
+ *            type: string
+ *            format: date-time,
+ *            default: 2020-01-09T00:00:00-03:00
+ *          description: Day for query
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                noExemple: noExemple
+ */

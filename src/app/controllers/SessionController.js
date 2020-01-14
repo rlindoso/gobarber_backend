@@ -79,4 +79,11 @@ export default new SessionController();
  *              example:
  *                email: rafael@email.com
  *                password: passwd
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                noExemple: noExemple
  */

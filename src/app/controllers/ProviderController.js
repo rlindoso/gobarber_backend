@@ -37,4 +37,11 @@ export default new ProviderController();
  *        - bearerAuth: []
  *      summary: List providers
  *      tags: [Providers]
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                noExemple: noExemple
  */
