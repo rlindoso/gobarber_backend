@@ -25,44 +25,24 @@ export default new FileController();
 /**
  * @swagger
  * path:
- *  /file:
+ *  /files:
  *    post:
  *      security:
  *        - bearerAuth: []
  *      summary: Create file
  *      tags: [File]
- *      parameters:
- *        - name: file
- *          in: query
- *          schema:
- *            type: file
- *          description: File image for avatar
- *      responses:
- *        "200":
- *          description: A user schema
- *          content:
- *            application/json:
- *              schema:
- *                noExemple: noExemple
- */
-
- /**
- * @swagger
- * path:
- *  /notifications/{id}:
- *    put:
- *      security:
- *        - bearerAuth: []
- *      summary: List Notifications
- *      tags: [Notifications]
- *      parameters:
- *        - name: id
- *          in: path
- *          schema:
- *            type: integer
- *            format: integer,
- *            default: 1
- *          description: Id notification
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          multipart/form-data:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - file
+ *              properties:
+ *                file:
+ *                  type: file
+ *                  description: File for user's avatar.
  *      responses:
  *        "200":
  *          description: A user schema
