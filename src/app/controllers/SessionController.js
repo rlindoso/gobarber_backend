@@ -57,7 +57,7 @@ export default new SessionController();
  * path:
  *  /sessions:
  *    post:
- *      summary: Do loin
+ *      summary: Do login
  *      tags: [Session]
  *      requestBody:
  *        required: true
@@ -79,11 +79,4 @@ export default new SessionController();
  *              example:
  *                email: rafael@email.com
  *                password: passwd
- *      responses:
- *        "200":
- *          description: A user schema
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schema/User'
  */

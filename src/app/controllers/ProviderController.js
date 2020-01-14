@@ -20,3 +20,21 @@ class ProviderController {
 }
 
 export default new ProviderController();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Providers
+ *   description: Providers
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /providers:
+ *    get:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: List providers
+ *      tags: [Providers]
+ */
