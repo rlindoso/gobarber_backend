@@ -34,3 +34,54 @@ class NotificationController {
 }
 
 export default new NotificationController();
+
+/**
+ * @swagger
+ * tags:
+ *   name: Notifications
+ *   description: Notifications
+ */
+
+/**
+ * @swagger
+ * path:
+ *  /notifications:
+ *    get:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: List Notifications
+ *      tags: [Notifications]
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                noExemple: noExemple
+ */
+
+ /**
+ * @swagger
+ * path:
+ *  /notifications/{id}:
+ *    put:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: List Notifications
+ *      tags: [Notifications]
+ *      parameters:
+ *        - name: id
+ *          in: path
+ *          schema:
+ *            type: integer
+ *            format: integer,
+ *            default: 1
+ *          description: Id notification
+ *      responses:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                noExemple: noExemple
+ */

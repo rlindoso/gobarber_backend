@@ -55,8 +55,8 @@ export default new ScheduleController();
  *          in: query
  *          schema:
  *            type: string
- *            format: date-time,
- *            default: 2020-01-09T00:00:00-03:00
+ *            format: date-time
+ *            default: 2020-01-09T15:00:00-03:00
  *          description: Day for query
  *      responses:
  *        "200":
