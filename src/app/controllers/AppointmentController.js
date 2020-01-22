@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore, format } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import User from '../models/User';
 import File from '../models/File';
@@ -109,6 +109,30 @@ class AppointmentController {
 
     return res.json(appointment);
   }
+
+  async delete(req, res) {
+    const appointment = await Appointment.findByPk(req.params.id);
+
+    if (appointment.user_id !== req.userId) {
+      return res.status(401).json({
+        error: "You don't have permission to cancel this appontment.",
+      });
+    }
+
+    const dateWithSub = subHours(appointment.date, 2);
+
+    if (isBefore(dateWithSub, new Date())){
+      return res.status(401).json({
+        error: "You can only cancel appointments 2 hours in advance."
+      })
+    }
+
+    appointment.canceled_at = new Date();
+
+    await appointment.save();
+
+    return res.json(appointment);
+  }
 }
 
 export default new AppointmentController();
@@ -168,6 +192,32 @@ export default new AppointmentController();
  *              example:
  *                provider_id: 1
  *                date: 2020-01-09T15:00:00-03:00
+ *      responses:
+ *        "200":
+ *          description: A appointment schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                noExemple: noExemple
+ */
+
+ /**
+ * @swagger
+ * path:
+ *  /appointments/{id}:
+ *    delete:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: Delete appointments
+ *      tags: [Appointment]
+ *      parameters:
+ *        - name: id
+ *          in: path
+ *          schema:
+ *            type: integer
+ *            format: integer,
+ *            default: 1
+ *          description: Id appointment
  *      responses:
  *        "200":
  *          description: A appointment schema
