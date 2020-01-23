@@ -6,6 +6,8 @@ import File from '../models/File';
 import Appointment from '../models/Appointment';
 import Notification from '../schemas/Notification';
 
+import Mail from '../../lib/Mail';
+
 class AppointmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
@@ -111,7 +113,15 @@ class AppointmentController {
   }
 
   async delete(req, res) {
-    const appointment = await Appointment.findByPk(req.params.id);
+    const appointment = await Appointment.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['name', 'email'],
+        },
+      ],
+    });
 
     if (appointment.user_id !== req.userId) {
       return res.status(401).json({
@@ -121,15 +131,21 @@ class AppointmentController {
 
     const dateWithSub = subHours(appointment.date, 2);
 
-    if (isBefore(dateWithSub, new Date())){
+    if (isBefore(dateWithSub, new Date())) {
       return res.status(401).json({
-        error: "You can only cancel appointments 2 hours in advance."
-      })
+        error: 'You can only cancel appointments 2 hours in advance.',
+      });
     }
 
     appointment.canceled_at = new Date();
 
     await appointment.save();
+
+    await Mail.sendMail({
+      to: `${appointment.provider.name} <${appointment.provider.email}`,
+      subject: 'Agendamento cancelado',
+      text: 'Você tem um novo cancelamento',
+    });
 
     return res.json(appointment);
   }
@@ -162,7 +178,7 @@ export default new AppointmentController();
  *                noExemple: noExemple
  */
 
- /**
+/**
  * @swagger
  * path:
  *  /appointments:
@@ -201,7 +217,7 @@ export default new AppointmentController();
  *                noExemple: noExemple
  */
 
- /**
+/**
  * @swagger
  * path:
  *  /appointments/{id}:
