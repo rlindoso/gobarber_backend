@@ -47,7 +47,7 @@ export default new ScheduleController();
  *  /schedule:
  *    get:
  *      security:
- *        - bearerAuth: [] 
+ *        - bearerAuth: []
  *      summary: List schedule
  *      tags: [Schedule]
  *      parameters:
